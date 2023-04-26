@@ -1,34 +1,46 @@
 #include "main.h"
 
 /**
- * print_int - prints an integer 
- * @number: number to print
+ * print_int - prints an integer
+ * @n: number to print
  * Return: length of digitd
  */
 
-int print_int(int number)
+int print_int(int n)
 {
-	int n, digit_len = 0;
+	int num, last = n % 10, digit, exp = 1;
+	int  i = 1;
 
-	if (number > 0)
+	n = n / 10;
+	num = n;
+
+	if (last < 0)
 	{
-
-	if (number == 0)
+		_putchar('-');
+		num = -num;
+		n = -n;
+		last = -last;
+		i++;
+	}
+	if (num > 0)
 	{
-		return (0);
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			digit = num / exp;
+			_putchar(digit + '0');
+			num = num - (digit * exp);
+			exp = exp / 10;
+			i++;
+		}
 	}
-	else
-	{
-		n = number / 10;
-	}
+	_putchar(last + '0');
 
-	print_int(n);
-	_putchar(number % 10 + '0');
-
-	}
-
-	digit_len++;
-
-	return(digit_len);	
-
+	return (i);
 }
+

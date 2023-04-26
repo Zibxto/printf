@@ -10,11 +10,14 @@
 
 int _printf(const char *format, ...)
 {
-	unsigned int i, char_len = 0;
+	unsigned int i, char_len = 0, str_len, int_len;
 
 	va_list args;
 
 	va_start(args, format);
+
+	if (format == NULL)
+		return (-1);
 
 	for (i = 0; format[i] != '\0'; i++)
 	{
@@ -33,13 +36,13 @@ int _printf(const char *format, ...)
 		/* to print string using %s */
 		else if (format[i] == '%' && format[i + 1] == 's')
 		{
-			int str_len = print_string(va_arg(args, char *));	
+			str_len = print_string(va_arg(args, char *));
 			char_len += str_len;
 			i++;
-		}	
+		}
 
 		/* to print % */
-		else if (format[i + 1] == '%')
+		else if (format[i] == '%' && format[i + 1] == '%')
 		{
 			_putchar('%');
 			i++;
@@ -48,12 +51,14 @@ int _printf(const char *format, ...)
 		/* to print integer using %i & %d */
 		else if (format[i] == '%' && format[i + 1] == 'i')
 		{
-			print_int(va_arg(args, int));
+			int_len = print_int(va_arg(args, int));
+			char_len += int_len;
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == 'd')
 		{
-			print_int(va_arg(args, int));
+			int_len = print_int(va_arg(args, int));
+			char_len += int_len;
 			i++;
 		}
 			char_len += 1;

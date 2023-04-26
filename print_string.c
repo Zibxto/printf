@@ -12,7 +12,7 @@ int print_string(char *string)
 
 	int str_len = 0;
 
- 	for (str_count = 0; string[str_count] != '\0'; str_count++)
+	for (str_count = 0; string[str_count] != '\0'; str_count++)
 	{
 		_putchar(string[str_count]);
 		str_len += 1;
